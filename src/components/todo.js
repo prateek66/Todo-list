@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TodoList from "./TodoList";
 
 function Todo() {
   const [todo, setTodo] = useState([]);
   const [input, setInput] = useState("");
+
+   const inputRef = useRef(null);
+
+   useEffect(() => {
+     inputRef.current.focus();
+   });
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("todo"));
@@ -57,6 +63,7 @@ function Todo() {
                 name="todo"
                 value={input}
                 onChange={handleOnchange}
+                ref={inputRef}
               />
             </div>
             <div className="m-3">
